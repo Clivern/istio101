@@ -1,43 +1,46 @@
 # Exercise 2 - Installing Istio on IBM Cloud Kubernetes Service
+
 In this module, you download and install Istio.
 
-1.  Either download Istio directly from [https://github.com/istio/istio/releases](https://github.com/istio/istio/releases) or get the latest version by using curl:
+1. Either download Istio directly from [https://github.com/istio/istio/releases](https://github.com/istio/istio/releases) or get the latest version by using curl:
 
-    ```shell
-    curl -L https://git.io/getLatestIstio | sh -
-    ```
+   ```text
+   curl -L https://git.io/getLatestIstio | sh -
+   ```
 
 2. Change the directory to the Istio file location.
 
-    ```shell
+   ```text
     cd istio-<version-number>
-    ```
+   ```
 
-3. Add the `istioctl` client to your PATH. 
+3. Add the `istioctl` client to your PATH.
 
-    ```shell
+   ```text
     export PATH=$PWD/bin:$PATH
-    ```
+   ```
 
 4. Install Istio’s Custom Resource Definitions via kubectl apply, and wait a few seconds for the CRDs to be committed in the kube-apiserver:
 
-    ```shell
+   ```text
     for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
-    ```
+   ```
 
 5. Now let's install Istio demo profile into the `istio-system` namespace in your Kubernetes cluster:
 
-    ```shell
+   ```text
     kubectl apply -f install/kubernetes/istio-demo.yaml
-    ```
+   ```
 
 6. Ensure that the `istio-*` Kubernetes services are deployed before you continue.
 
-    ```shell
+   ```text
     kubectl get svc -n istio-system
-    ```
-    Sample output:
-    ```shell
+   ```
+
+   Sample output:
+
+   ```text
     NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                                                                                                                                      AGE
     grafana                  ClusterIP      172.21.135.33    <none>           3000/TCP                                                                                                                                     35s
     istio-citadel            ClusterIP      172.21.242.77    <none>           8060/TCP,15014/TCP                                                                                                                           34s
@@ -55,17 +58,19 @@ In this module, you download and install Istio.
     prometheus               ClusterIP      172.21.53.185    <none>           9090/TCP                                                                                                                                     34s
     tracing                  ClusterIP      172.21.6.64      <none>           80/TCP                                                                                                                                       29s
     zipkin                   ClusterIP      172.21.229.37    <none>           9411/TCP                                                                                                                                     29s
-    ```
+   ```
 
-**Note: If your istio-ingressgateway service IP is <pending>, confirm that you are using a standard/paid cluster. Free cluster is not supported for this lab.**
+**Note: If your istio-ingressgateway service IP is , confirm that you are using a standard/paid cluster. Free cluster is not supported for this lab.**
 
 1. Ensure the corresponding pods `istio-citadel-*`, `istio-ingressgateway-*`, `istio-pilot-*`, and `istio-policy-*` are all in **`Running`** state before you continue.
 
-    ```shell
+   ```text
     kubectl get pods -n istio-system
-    ```
-    Sample output:
-    ```shell
+   ```
+
+   Sample output:
+
+   ```text
     NAME                                      READY   STATUS      RESTARTS   AGE
     grafana-5c45779547-v77cl                  1/1     Running     0          103s
     istio-citadel-79cb95445b-29wvj            1/1     Running     0          102s
@@ -82,10 +87,11 @@ In this module, you download and install Istio.
     istio-tracing-5fbc94c494-5nkjd            1/1     Running     0          102s
     kiali-56d95cf466-bpgfq                    1/1     Running     0          103s
     prometheus-8647cf4bc7-qnp6x               1/1     Running     0          102s
-    ```
+   ```
 
-    Before you continue, make sure all the pods are deployed and are either in the **`Running`** or **`Completed`** state. If they're in `pending` state, wait a few minutes to let the deployment finish.
+   Before you continue, make sure all the pods are deployed and are either in the **`Running`** or **`Completed`** state. If they're in `pending` state, wait a few minutes to let the deployment finish.
 
-    Congratulations! You successfully installed Istio into your cluster.
+   Congratulations! You successfully installed Istio into your cluster.
 
-#### [Continue to Exercise 3 - Deploy Guestbook with Istio Proxy](../exercise-3/README.md)
+## [Continue to Exercise 3 - Deploy Guestbook with Istio Proxy](exercise-3.md)
+
