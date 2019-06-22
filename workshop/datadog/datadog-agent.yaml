@@ -76,6 +76,8 @@ spec:
           - name: passwd
             mountPath: /etc/passwd
             readOnly: true
+          - name: logpath
+            mountPath: /var/log/pods
           - name: pointerdir
             mountPath: /opt/datadog-agent/run
         livenessProbe:
@@ -102,6 +104,9 @@ spec:
         - hostPath:
             path: /etc/passwd
           name: passwd
+        - hostPath:
+            path: /var/log/pods
+          name: logpath
         - hostPath:
             path: /opt/datadog-agent/run
           name: pointerdir
