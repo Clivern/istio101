@@ -51,7 +51,7 @@ kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: datadog-agent
-  namespace: default
+  namespace: datadog
 ---
 # Your admin user needs the same permissions to be able to grant them
 # Easiest way is to bind your user to the cluster-admin role
@@ -67,4 +67,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: datadog-agent
-  namespace: default
+  namespace: datadog

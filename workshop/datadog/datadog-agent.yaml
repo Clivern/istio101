@@ -2,12 +2,14 @@ apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: datadog-agent
+  namespace: datadog
 spec:
   template:
     metadata:
       labels:
         app: datadog-agent
       name: datadog-agent
+      namespace: datadog
     spec:
       serviceAccount: datadog-agent
       containers:
