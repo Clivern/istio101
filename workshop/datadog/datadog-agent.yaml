@@ -1,3 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: dd-agent-config
+  namespace: datadog
+data:
+  ksm-config: |-
+    init_config:
+    instances:
+    - kube_state_url: http://kube-state-metrics.kube-system:8080/metrics
+---
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -82,6 +93,8 @@ spec:
             mountPath: /var/log/pods
           - name: pointerdir
             mountPath: /opt/datadog-agent/run
+          - name: dd-agent-config
+            mountPath: /conf.d
         livenessProbe:
           exec:
             command:
@@ -112,3 +125,9 @@ spec:
         - hostPath:
             path: /opt/datadog-agent/run
           name: pointerdir
+        - name: dd-agent-config
+          configMap:
+            name: dd-agent-config
+            items:
+            - key: ksm-config
+              path: kubernetes_state.yaml
