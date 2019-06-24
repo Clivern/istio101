@@ -2,31 +2,86 @@
 
 ### Challenges with microservices
 
-We all know that microservice architecture is the perfect fit for cloud native applications and it increases the delivery velocities greatly. Envision you have many microservices that are delivered by multiple teams, how do you observe the the overall platform and each of the service to find out exactly what is going on with each of the services? When something goes wrong, how do you know which service or which communication among the few services are causing the problem?
+We all know that microservice architecture is the perfect fit for cloud native applications and it increases the delivery velocities greatly. Envision you have many microservices that are delivered by multiple teams, how do you observe the overall platform and each of the services to find out exactly what is going on with each of the services? When something goes wrong, how do you know which service or which communication among the few services are causing the problem?
 
 ### Istio telemetry
 
-
-
 Istio's tracing and metrics features are designed to provide broad and granular insight into the health of all services. Istio's role as a service mesh makes it the ideal data source for observability information, particularly in a microservices environment. As requests pass through multiple services, identifying performance bottlenecks becomes increasingly difficult using traditional debugging techniques. Distributed tracing provides a holistic view of requests transiting through multiple services, allowing for immediate identification of latency issues. With Istio, distributed tracing comes by default. This will expose latency, retry, and failure information for each hop in a request.
+
+The Istio’s design makes it easy to gather telemetry. In this workshop we’ll be using Datadog to gather metrics, distributed traces, and logs from Istio.
 
 You can read more about how [Istio mixer enables telemetry reporting](https://istio.io/docs/concepts/policy-and-control/mixer.html).
 
-### Setting up RBAC for Datadog
 
-[ TODO ]
 
-### Adding the Datadog Daemonset
+### Setting up Datadog
 
-[ TODO ]
+Navigate to the Datadog directory.
 
-### Adding Kube State Metrics
+```
+cd ../../datadog
+```
 
-[ TODO ]
+In exercise 3, you learned about sidecars and set up Istio’s automatic sidecar injection. To prevent automatic sidecar injection and to keep your kubernetes workloads organized and easier to manage, create a namespace for Datadog.
 
-### Enabling the Istio integration
+Create the `datadog` namespace.
 
-[ TODO ]
+```
+kubectl create -f datadog-namespace.yaml
+```
+
+2. Create the role-based access controls (RBAC) that will allow the Datadog Agent to collect telemetry from the Kubernetes cluster.
+
+```
+Kubectl create -f datadog-rbac.yaml
+```
+
+3. Install Kube-state-metrics to expose more telemetry about the internal state of Kubernetes
+
+```
+Kubectl create -f datadog-kubestatemetrics.yaml
+```
+
+### The Datadog Daemonset
+
+In the previous exercises, you created Kubernetes Deployments. Deployments specify the number of replica pods that Kubernetes should deploy. Kubernetes will automatically assign those pods to nodes with available resources. You’ll use a different type of Kubernetes resource, a Daemonset, to deploy the Datadog Agent. Daemonsets ensure that one pod is deployed on every Kubernetes node in the cluster.
+
+Log into your Datadog account, then go to [https://app.datadoghq.com/account/settings#api](https://app.datadoghq.com/account/settings#api) to get your API key. Edit the `datadog-agent.yaml` file and replace the `<YOUR API KEY>` placeholder with your API key.
+
+Create the Datadog Daemonset.
+
+```
+Kubectl create -f datadog-agent.yaml
+```
+
+2. Verify that the Daemonset has been created and is running one pod per node.
+
+```
+# Show the nodes in your cluster
+Kubectl get nodes
+# Show the pods running in the Datadog namespace along with which node they’re on
+Kubectl get pods -n datadog -o wide
+```
+
+3. Verify that the Datadog Agent is collecting data. Copy the name of a Datadog pod from step 2 and use it to execute the `agent status` command.
+
+```
+Kubect exec -ti -n datadog your-datadog-agent-pod-name -- agent status
+```
+
+The output will contain a list of systems that Datadog is monitoring, including Istio:
+
+```
+istio (2.1.0)
+-------------
+Instance ID: istio:36ff5e31cbc31301 [OK]
+Total Runs: 6
+Metric Samples: Last Run: 328, Total: 1,500
+Events: Last Run: 0, Total: 0
+Service Checks: Last Run: 0, Total: 0
+Average Execution Time : 452ms
+```
+
 
 === EVERYTHING BELOW HERE IS LEGACY ===
 
@@ -60,71 +115,6 @@ Go to this external ip address in the browser to try out your guestbook.
     for i in {1..20}; do sleep 0.5; curl http://<guestbook_IP>/; done
    ```
 
-## View guestbook telemetry data
-
-#### Jaeger
-
-1. Establish port forwarding from local port 16686 to the Tracing instance:
-
-   ```text
-    kubectl port-forward -n istio-system \
-      $(kubectl get pod -n istio-system -l app=jaeger -o jsonpath='{.items[0].metadata.name}') \
-      16686:16686 &
-   ```
-
-2. In your browser, go to `http://127.0.0.1:16686`
-3. From the **Services** menu, select either the **guestbook** or **analyzer** service.
-4. Scroll to the bottom and click on **Find Traces** button to see traces.
-
-Read more about [Jaeger](https://www.jaegertracing.io/docs/)
-
-#### Grafana
-
-1. Establish port forwarding from local port 3000 to the Grafana instance:
-
-   ```text
-    kubectl -n istio-system port-forward \
-      $(kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') \
-      3000:3000 &
-   ```
-
-2. Browse to [http://localhost:3000](http://localhost:3000) and navigate to the `Istio Service Dashboard` by clicking on the Home menu on the top left, then Istio, then Istio Service Dashboard.
-3. Select guestbook in the Service drop down.
-4. In a different tab, visit the guestbook application and refresh the page multiple times to generate some load, or run the load script you used previously. Switch back to the Grafana tab.
-
-This Grafana dashboard provides metrics for each workload. Explore the other dashboard provided as well.
-
-Read more about [Grafana](http://docs.grafana.org/).
-
-#### Prometheus
-
-1. Establish port forwarding from local port 9090 to the Prometheus instance.
-
-   ```text
-    kubectl -n istio-system port-forward \
-      $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') \
-      9090:9090 &
-   ```
-
-2. Browse to [http://localhost:9090/graph](http://localhost:9090/graph), and in the “Expression” input box, enter: `istio_request_bytes_count`. Click Execute and then select Graph.
-3. Then try another query: `istio_requests_total{destination_service="guestbook.default.svc.cluster.local", destination_version="2.0"}`
-
-#### Kiali
-
-Kiali is an open-source project that installs on top of Istio to visualize your service mesh. It provides deeper insight into how your microservices interact with one another, and provides features such as circuit breakers and request rates for your services
-
-1. Establish port forwarding from local port 20001 to the Kiali instance.
-
-   ```text
-    kubectl -n istio-system port-forward \
-    $(kubectl -n istio-system get pod -l app=kiali -o jsonpath='{.items[0].metadata.name}') \
-    20001:20001 &
-   ```
-
-2. Browse to [http://localhost:20001/kiali/](http://localhost:20001/kiali/), and login with `admin` for both username and password.
-3. Select Graph and then choose `default` namespace. You should see a visual service graph of the various services in your Istio mesh.
-4. Use the `Edge Labels` dropdown and select `Traffic rate per second` to see the request rates as well.
-5. Kiali has a number of views to help you visualize your services. Click through the vairous tabs to explore the service graph, and the various views for workloads, applications, and services.
 
 ## Understand what happened
 
