@@ -12,6 +12,15 @@ data:
       galley_endpoint: http://istio-galley.istio-system:15014/metrics
       pilot_endpoint: http://istio-pilot.istio-system:15014/metrics
       send_histograms_buckets: true
+  prometheus-config: |-
+    init_config:
+    instances:
+    - prometheus_url: http://prometheus.istio-system:9090/metrics
+      namespace: guestbook
+      metrics:
+      - http_requests_total
+      type_overrides:
+        http_requests_total: guage
   ksm-config: |-
     init_config:
     instances:
@@ -139,5 +148,7 @@ spec:
             items:
             - key: istio-config
               path: istio.yaml
+            - key: prometheus-config
+              path: prometheus.yaml
             - key: ksm-config
               path: kubernetes_state.yaml
