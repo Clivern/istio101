@@ -27,7 +27,8 @@ In exercise 3, you learned about sidecars and set up Istio’s automatic sidecar
 Create the `datadog` namespace.
 
 ```
-kubectl create -f datadog-namespace.yaml
+kubectl create namespace datadog
+
 ```
 
 2. Create the role-based access controls (RBAC) that will allow the Datadog Agent to collect telemetry from the Kubernetes cluster.
