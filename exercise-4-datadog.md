@@ -34,13 +34,13 @@ kubectl create namespace datadog
 2. Create the role-based access controls (RBAC) that will allow the Datadog Agent to collect telemetry from the Kubernetes cluster.
 
 ```
-Kubectl create -f datadog-rbac.yaml
+kubectl create -f datadog-rbac.yaml
 ```
 
 3. Install Kube-state-metrics to expose more telemetry about the internal state of Kubernetes
 
 ```
-Kubectl create -f datadog-kubestatemetrics.yaml
+kubectl create -f datadog-kubestatemetrics.yaml
 ```
 
 ### The Datadog Daemonset
@@ -52,16 +52,16 @@ Log into your Datadog account, then go to [https://app.datadoghq.com/account/set
 Create the Datadog Daemonset.
 
 ```
-Kubectl create -f datadog-agent.yaml
+kubectl create -f datadog-agent.yaml
 ```
 
 2. Verify that the Daemonset has been created and is running one pod per node.
 
 ```
 # Show the nodes in your cluster
-Kubectl get nodes
+kubectl get nodes
 # Show the pods running in the Datadog namespace along with which node they’re on
-Kubectl get pods -n datadog -o wide
+kubectl get pods -n datadog -o wide
 ```
 
 3. Verify that the Datadog Agent is collecting data. Copy the name of a Datadog pod from step 2 and use it to execute the `agent status` command.
