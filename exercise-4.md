@@ -63,7 +63,7 @@ In the previous exercises, you created Kubernetes Deployments. Deployments speci
 3. Verify that the Datadog Agent is collecting data. Copy the name of a Datadog pod from step 2 and use it to execute the `agent status` command.
 
    ```text
-   Kubect exec -ti -n datadog your-datadog-agent-pod-name -- agent status
+   kubectl exec -ti -n datadog your-datadog-agent-pod-name -- agent status
    ```
 
    The output will contain a list of systems that Datadog is monitoring, including Istio:
