@@ -11,26 +11,15 @@ You must already have a [cluster created](https://console.bluemix.net/docs/conta
    ibmcloud login
    ```
 
-   If you have a federated account, include the `--sso` flag.
-
-   ```text
-   ibmcloud login --sso
-   ```
-
-   If you have an api key, use:
-
-   ```text
-   ibmcloud login --apikey <apikey>
-   ```
-
-3. Install the IBM Cloud Kubernetes Service plug-in.
+3. Choose the IBM Account when prompted: `IBM (62c8587074c362fc4525ef4ab5012951) <-> 1835659`
+4. Install the IBM Cloud Kubernetes Service plug-in.
 
    ```text
    ibmcloud plugin install container-service
    ```
 
-4. To verify that the plug-in is installed properly, run `ibmcloud plugin list`. The Container Service plug-in is displayed in the results as `container-service/kubernetes-service`.
-5. Initialize the Container Service plug-in and point the endpoint to your region. For example when prompted, enter `5` for `us-east`.
+5. To verify that the plug-in is installed properly, run `ibmcloud plugin list`. The Container Service plug-in is displayed in the results as `container-service/kubernetes-service`.
+6. Initialize the Container Service plug-in and point the endpoint to your region. For example when prompted, enter `5` for `us-east`.
 
    Example:
 
@@ -46,7 +35,7 @@ You must already have a [cluster created](https://console.bluemix.net/docs/conta
    Enter a number> 5
    ```
 
-6. Install the `kubectl` Kubernetes CLI. Go to the [Kubernetes page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl), and follow the steps to install the CLI.
+7. Install the `kubectl` Kubernetes CLI. Go to the [Kubernetes page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl), and follow the steps to install the CLI.
 
 ## Access your cluster
 
