@@ -20,14 +20,15 @@ After you complete this course, you'll be able to:
 
 You do not need to make your own Kubernetes cluster. We've pre-provisioned clusters on IBM Cloud. To get access to one of these clusters, follow these steps:
 
-1. Create an [IBM Cloud account](http://cloud.ibm.com/registration/)
-2. Log-in to [IBM Cloud](https://cloud.ibm.com)
-3. Use the Grant Cluster helper application to obtain a cluster.
+1. Get a [Datadog account](https://bit.ly/dodams-datadog-accounts)
+2. Create an [IBM Cloud account](http://cloud.ibm.com/registration/)
+3. Log-in to [IBM Cloud](https://cloud.ibm.com)
+4. Use the [Grant Cluster](https://grant-cluster-iks.mybluemix.net/) helper application to obtain a cluster.
    1. Lab key is `devopsdays`
    2. Enter the IBM ID you created in `Step 1`
    3. Use the `Frankfurt` region
    4. Hit \`Submit\`
-4. **IMPORTANT**: Make a note of the confirmation page - screenshot or copy the cluster number. Note the cluster number:  `mycluster###`
+5. **IMPORTANT**: Make a note of the confirmation page - screenshot or copy the cluster number. Note the cluster number:  `mycluster###`
 
 You should also have a basic understanding of containers, Kubernetes, and Istio.
 
