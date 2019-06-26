@@ -171,5 +171,5 @@ Depending on whether a service handles [HTTP](https://istio.io/docs/reference/co
 3. Which Istio component is responsible for sending traffic management configurations to Istio sidecars?  Options: \(Mixer, Citadel, Pilot, Kubernetes\)  Answer: Pilot
 4. What is the name of the default proxy that runs in Istio sidecars and routes requests within the service mesh?  Options: \(NGINX, Envoy, HAProxy\)  Answer: Envoy
 
-#### [Continue to Exercise 7 - Security](exercise-7.md)
+#### [Continue to Exercise 7 - Security](optional-exercises/exercise-7.md)
 

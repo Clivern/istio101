@@ -42,8 +42,8 @@ You should also have a basic understanding of containers, Kubernetes, and Istio.
 * [Exercise 4 - Observe service telemetry: metrics and tracing](exercise-4.md)
 * [Exercise 5 - Expose the service mesh with the Istio Ingress Gateway](exercise-5.md)
 * [Exercise 6 - Perform traffic management](exercise-6.md)
-* [Exercise 7 - Secure your service mesh](exercise-7.md)
-* [Exercise 8 - Enforce policies for microservices](exercise-8.md)
+* [Exercise 7 - Secure your service mesh](optional-exercises/exercise-7.md)
+* [Exercise 8 - Enforce policies for microservices](optional-exercises/exercise-8.md)
 
 ## Cleaning up the Workshop
 

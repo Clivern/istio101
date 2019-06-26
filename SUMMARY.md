@@ -7,6 +7,9 @@
 * [Exercise 4 - Observe service telemetry: metrics and tracing](exercise-4.md)
 * [Exercise 5 - Expose the service mesh with the Istio Ingress Gateway](exercise-5.md)
 * [Exercise 6 - Perform traffic management](exercise-6.md)
-* [Exercise 7 - Secure your services](exercise-7.md)
-* [Exercise 8 - Enforce policies for microservices](exercise-8.md)
+
+## Optional Exercises
+
+* [Extra Credit 1 - Secure your services](optional-exercises/exercise-7.md)
+* [Extra Credit 2 - Enforce policies for microservices](optional-exercises/exercise-8.md)
 
