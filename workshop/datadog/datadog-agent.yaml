@@ -12,19 +12,6 @@ data:
       galley_endpoint: http://istio-galley.istio-system:15014/metrics
       pilot_endpoint: http://istio-pilot.istio-system:15014/metrics
       send_histograms_buckets: true
-  prometheus-config: |-
-    init_config:
-    instances:
-    - prometheus_url: http://prometheus.istio-system:9090/metrics
-      namespace: guestbook
-      metrics:
-      - http_requests_total
-      type_overrides:
-        http_requests_total: guage
-  ksm-config: |-
-    init_config:
-    instances:
-    - kube_state_url: http://kube-state-metrics.kube-system:8080/metrics
 ---
 apiVersion: extensions/v1beta1
 kind: DaemonSet
@@ -83,13 +70,6 @@ spec:
           # If your Kubernetes is running the Containerd CRI, uncomment the lines below.
           - name: DD_CRI_SOCKET_PATH
             value: "/var/run/containerd/containerd.sock"
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "200m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
         volumeMounts:
           #- name: dockersocket
           #  mountPath: /var/run/docker.sock
@@ -148,7 +128,3 @@ spec:
             items:
             - key: istio-config
               path: istio.yaml
-            - key: prometheus-config
-              path: prometheus.yaml
-            - key: ksm-config
-              path: kubernetes_state.yaml
