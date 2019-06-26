@@ -1,5 +1,7 @@
 # Exercise 3 - Deploy the Guestbook app with Istio Proxy
 
+
+
 The Guestbook app is a sample app for users to leave comments. It consists of a web front end, Redis master for storage, and a replicated set of Redis slaves. We will also integrate the app with Watson Tone Analyzer which detects the sentiment in users' comments and replies with emoticons.
 
 The guestbook files are in the `/workshop/guestbook` directory. Navigate into the app directory.
@@ -139,35 +141,52 @@ These commands will inject the Istio Envoy sidecar into the guestbook pods, as w
 
 Watson Tone Analyzer detects the tone from the words that users enter into the Guestbook app. The tone is converted to the corresponding emoticons.
 
-1. Create Watson Tone Analyzer in your account.
+1. Switch to your own account. Login again with `ibmcloud login`
+   1. Choose your own account
+   2. ```text
+      Select an account:
+      1. Sai Vennam's Account (d815248d6ad0cc354df42d43db45ce09) <-> 1909673
+      2. IBM (62c8587074c362fc4525ef4ab5012951) <-> 1835659
+      Enter a number> 1
+      ```
+2. Create Watson Tone Analyzer in your account.
 
    ```text
     ibmcloud resource service-instance-create my-tone-analyzer-service tone-analyzer lite us-south
    ```
 
-2. Create the service key for the Tone Analyzer service. This command should output the credentials you just created. You will need the value for **apikey** & **url** later.
+3. Create the service key for the Tone Analyzer service. This command should output the credentials you just created. You will need the value for **apikey** & **url** later.
 
    ```text
     ibmcloud resource service-key-create tone-analyzer-key Manager --instance-name my-tone-analyzer-service
    ```
 
-3. If you need to get the service-keys later, you can use the following command:
+4. If you need to get the service-keys later, you can use the following command:
 
    ```text
     ibmcloud resource service-key tone-analyzer-key
    ```
 
-4. Open the `analyzer-deployment.yaml` and find the env section near the end of the file. Replace `YOUR_API_KEY` with your own API key, and replace `YOUR_URL` with the url value you saved before. YOUR\_URL should look something like `https://gateway.watsonplatform.net/tone-analyzer/api`. Save the file.  
+5. Open the `analyzer-deployment.yaml` and find the env section near the end of the file. Replace `YOUR_API_KEY` with your own API key, and replace `YOUR_URL` with the url value you saved before. YOUR\_URL should look something like `https://gateway.watsonplatform.net/tone-analyzer/api`. Save the file.  
  
 
    ![](.gitbook/assets/screen-shot-2019-06-26-at-1.23.59-pm.png)
 
-5. Deploy the analyzer pods and service, using the `analyzer-deployment.yaml` and `analyzer-service.yaml` files found in the `guestbook/v2` directory. The analyzer service talks to Watson Tone Analyzer to help analyze the tone of a message.
+6. Deploy the analyzer pods and service, using the `analyzer-deployment.yaml` and `analyzer-service.yaml` files found in the `guestbook/v2` directory. The analyzer service talks to Watson Tone Analyzer to help analyze the tone of a message.
 
    ```text
     kubectl apply -f analyzer-deployment.yaml
     kubectl apply -f analyzer-service.yaml
    ```
+
+7. Switch back to the IBM account. Login again with `ibmcloud login`
+   1. Choose the IBM account
+   2. ```text
+      Select an account:
+      1. Sai Vennam's Account (d815248d6ad0cc354df42d43db45ce09) <-> 1909673
+      2. IBM (62c8587074c362fc4525ef4ab5012951) <-> 1835659
+      Enter a number> 2
+      ```
 
 Great! Your guestbook app is up and running. In Exercise 4, you'll be able to see the app in action by directly accessing the service endpoint. You'll also be able to view Telemetry data for the app.
 

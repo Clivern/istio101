@@ -11,7 +11,13 @@ You must already have a [cluster created](https://console.bluemix.net/docs/conta
    ibmcloud login
    ```
 
-3. Choose the IBM Account when prompted: `IBM (62c8587074c362fc4525ef4ab5012951) <-> 1835659`
+3. Choose the IBM account:
+   1. ```text
+      Select an account:
+      1. Sai Vennam's Account (d815248d6ad0cc354df42d43db45ce09) <-> 1909673
+      2. IBM (62c8587074c362fc4525ef4ab5012951) <-> 1835659
+      Enter a number> 2
+      ```
 4. Install the IBM Cloud Kubernetes Service plug-in.
 
    ```text
