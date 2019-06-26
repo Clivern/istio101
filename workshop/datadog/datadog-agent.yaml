@@ -12,6 +12,10 @@ data:
       galley_endpoint: http://istio-galley.istio-system:15014/metrics
       pilot_endpoint: http://istio-pilot.istio-system:15014/metrics
       send_histograms_buckets: true
+  ksm-config: |-
+    init_config:
+    instances:
+    - kube_state_url: http://kube-state-metrics.kube-system:8080/metrics
 ---
 apiVersion: extensions/v1beta1
 kind: DaemonSet
@@ -128,3 +132,5 @@ spec:
             items:
             - key: istio-config
               path: istio.yaml
+            - key: ksm-config
+              path: kubernetes_state.yaml
