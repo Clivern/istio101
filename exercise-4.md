@@ -34,6 +34,12 @@ In exercise 3, you learned about sidecars and set up Istio’s automatic sidecar
    kubectl create -f datadog-rbac.yaml
    ```
 
+3. Install Kubernetes State Metrics in order to expose metrics about the state of objects in Kubernetes.
+
+   ```text
+   kubectl create -f datadog-kubestatemetrics.yaml
+   ```
+
 ## The Datadog Daemonset
 
 In the previous exercises, you created Kubernetes Deployments. Deployments specify the number of replica pods that Kubernetes should deploy. Kubernetes will automatically assign those pods to nodes with available resources. You’ll use a different type of Kubernetes resource, a Daemonset, to deploy the Datadog Agent. Daemonsets ensure that one pod is deployed on every Kubernetes node in the cluster.
