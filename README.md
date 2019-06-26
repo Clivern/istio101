@@ -18,11 +18,18 @@ After you complete this course, you'll be able to:
 
 ## Prerequisites
 
-You must you must have a Pay-As-You-Go, or Subscription [IBM Cloud account](https://console.bluemix.net/registration/) to complete all the modules in this course.
+You do not need to make your own Kubernetes cluster. We've pre-provisioned clusters on IBM Cloud. To get access to one of these clusters, follow these steps:
 
-You must have [already created a Standard cluster](https://console.bluemix.net/docs/containers/container_index.html#container_index) in IBM Cloud Kubernetes Service. **FREE Cluster is not supported for this lab**
+1. Create an [IBM Cloud account](http://cloud.ibm.com/registration/)
+2. Log-in to [IBM Cloud](https://cloud.ibm.com)
+3. Use the Grant Cluster helper application to obtain a cluster.
+   1. Lab key is `devopsdays`
+   2. Enter the IBM ID you created in `Step 1`
+   3. Use the `Frankfurt` region
+   4. Hit \`Submit\`
+4. **IMPORTANT**: Make a note of the confirmation page - screenshot or copy the cluster number. Note the cluster number:  `mycluster###`
 
-You should have a basic understanding of containers, IBM Cloud Kubernetes Service, and Istio. If you have no experience with those, take the following courses: 1. [Get started with Kubernetes and IBM Cloud Kubernetes Service](https://cognitiveclass.ai/courses/kubernetes-course/) 2. [Get started with Istio and IBM Cloud Kubernetes Service](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/)
+You should also have a basic understanding of containers, Kubernetes, and Istio.
 
 ## Workshop setup
 

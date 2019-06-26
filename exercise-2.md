@@ -46,7 +46,7 @@ For other operating systems and install methods, refer to the [Helm installation
    kubectl create namespace istio-system
    ```
 
-5. Create the Istio custom resource definitions (CRDs)
+5. Create the Istio custom resource definitions \(CRDs\)
 
    ```text
    helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system | kubectl apply -f -
@@ -88,7 +88,7 @@ For other operating systems and install methods, refer to the [Helm installation
 
 **Note: If your istio-ingressgateway service external IP is `<none>`, confirm that you are using a standard/paid cluster. Free cluster is not supported for this lab.**
 
-8. Ensure the corresponding pods `istio-citadel-*`, `istio-ingressgateway-*`, `istio-pilot-*`, and `istio-policy-*` are all in **`Running`** state before you continue.
+1. Ensure the corresponding pods `istio-citadel-*`, `istio-ingressgateway-*`, `istio-pilot-*`, and `istio-policy-*` are all in **`Running`** state before you continue.
 
    ```text
     kubectl get pods -n istio-system
@@ -120,3 +120,4 @@ For other operating systems and install methods, refer to the [Helm installation
    Congratulations! You successfully installed Istio into your cluster.
 
 ## [Continue to Exercise 3 - Deploy Guestbook with Istio Proxy](exercise-3.md)
+

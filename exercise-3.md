@@ -2,11 +2,11 @@
 
 The Guestbook app is a sample app for users to leave comments. It consists of a web front end, Redis master for storage, and a replicated set of Redis slaves. We will also integrate the app with Watson Tone Analyzer which detects the sentiment in users' comments and replies with emoticons.
 
-The guestbook files are in the `/workshop/guestbook` directory.  Navigate into the app directory.
+The guestbook files are in the `/workshop/guestbook` directory. Navigate into the app directory.
 
-   ```text
+```text
     cd ../guestbook/v2
-   ```
+```
 
 ### Enable the automatic sidecar injection for the default namespace
 
