@@ -19,12 +19,12 @@ You must already have a [cluster created](https://console.bluemix.net/docs/conta
    ```
 
 5. To verify that the plug-in is installed properly, run `ibmcloud plugin list`. The Container Service plug-in is displayed in the results as `container-service/kubernetes-service`.
-6. Initialize the Container Service plug-in and point the endpoint to your region. For example when prompted, enter `5` for `us-east`.
+6. Initialize the Container Service plug-in and point the endpoint to your region by running `ibmcloud ks region-set`. For example when prompted, enter 3 for `eu-central`.
 
    Example:
 
    ```text
-   ibmcloud ks region-set
+   $ ibmcloud ks region-set
    Choose a region:
    1. ap-north
    2. ap-south
@@ -32,7 +32,7 @@ You must already have a [cluster created](https://console.bluemix.net/docs/conta
    4. uk-south
    5. us-east
    6. us-south
-   Enter a number> 5
+   Enter a number> 3
    ```
 
 7. Install the `kubectl` Kubernetes CLI. Go to the [Kubernetes page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl), and follow the steps to install the CLI.
@@ -52,7 +52,7 @@ Learn how to set the context to work with your cluster by using the `kubectl` CL
    b. Set an environment variable for your cluster name:
 
    ```text
-   export MYCLUSTER=<your_cluster_name>
+   export MYCLUSTER=myclusterXXX
    ```
 
    c. Download the configuration file and certificates for your cluster using the `cluster-config` command.
