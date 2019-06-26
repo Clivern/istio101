@@ -2,11 +2,11 @@
 
 The Guestbook app is a sample app for users to leave comments. It consists of a web front end, Redis master for storage, and a replicated set of Redis slaves. We will also integrate the app with Watson Tone Analyzer which detects the sentiment in users' comments and replies with emoticons.
 
-The guestbook files are in the `/workshop/guestbook` directory.  Navigate into the app directory.
+The guestbook files are in the `/workshop/guestbook` directory. Navigate into the app directory.
 
-   ```text
+```text
     cd ../guestbook/v2
-   ```
+```
 
 ### Enable the automatic sidecar injection for the default namespace
 
@@ -157,7 +157,11 @@ Watson Tone Analyzer detects the tone from the words that users enter into the G
     ibmcloud resource service-key tone-analyzer-key
    ```
 
-4. Open the `analyzer-deployment.yaml` and find the env section near the end of the file. Replace `YOUR_API_KEY` with your own API key, and replace `YOUR_URL` with the url value you saved before. YOUR\_URL should look something like `https://gateway.watsonplatform.net/tone-analyzer/api`. Save the file.
+4. Open the `analyzer-deployment.yaml` and find the env section near the end of the file. Replace `YOUR_API_KEY` with your own API key, and replace `YOUR_URL` with the url value you saved before. YOUR\_URL should look something like `https://gateway.watsonplatform.net/tone-analyzer/api`. Save the file.  
+ 
+
+   ![](.gitbook/assets/screen-shot-2019-06-26-at-1.23.59-pm.png)
+
 5. Deploy the analyzer pods and service, using the `analyzer-deployment.yaml` and `analyzer-service.yaml` files found in the `guestbook/v2` directory. The analyzer service talks to Watson Tone Analyzer to help analyze the tone of a message.
 
    ```text
