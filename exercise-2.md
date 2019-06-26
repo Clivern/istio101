@@ -97,22 +97,20 @@ For other operating systems and install methods, refer to the [Helm installation
    Sample output:
 
    ```text
-    NAME                                      READY   STATUS      RESTARTS   AGE
-    grafana-5c45779547-v77cl                  1/1     Running     0          103s
-    istio-citadel-79cb95445b-29wvj            1/1     Running     0          102s
-    istio-cleanup-secrets-1.1.0-mp6qq         0/1     Completed   0          112s
-    istio-egressgateway-6dfb8dd765-jzzxf      1/1     Running     0          104s
-    istio-galley-7bccb97448-tk8bz             1/1     Running     0          104s
-    istio-grafana-post-install-1.1.0-bvng6    0/1     Completed   0          113s
-    istio-ingressgateway-679bd59c6-5bsbr      1/1     Running     0          104s
-    istio-pilot-674d4b8469-ttxs8              2/2     Running     0          103s
-    istio-policy-6b8795b6b5-g5m2k             2/2     Running     2          103s
-    istio-security-post-install-1.1.0-cfqpx   0/1     Completed   0          111s
-    istio-sidecar-injector-646d77f96c-55twm   1/1     Running     0          102s
-    istio-telemetry-76c8fbc99f-hxskk          2/2     Running     2          103s
-    istio-tracing-5fbc94c494-5nkjd            1/1     Running     0          102s
-    kiali-56d95cf466-bpgfq                    1/1     Running     0          103s
-    prometheus-8647cf4bc7-qnp6x               1/1     Running     0          102s
+   NAME                                      READY   STATUS      RESTARTS   AGE
+   istio-citadel-7695fc84d9-wsk74            1/1     Running     0          41s
+   istio-cleanup-secrets-1.2.0-sv5ns         0/1     Completed   0          45s
+   istio-galley-75466f5dc7-n9rg4             0/1     Running     0          42s
+   istio-ingressgateway-69dfdb8d6-pn4bg      0/1     Running     0          42s
+   istio-init-crd-10-272xq                   0/1     Completed   0          52s
+   istio-init-crd-11-9zvsl                   0/1     Completed   0          52s
+   istio-init-crd-12-rg4sj                   0/1     Completed   0          52s
+   istio-pilot-5c5758cb-ptvdg                1/2     Running     0          41s
+   istio-policy-8469ffd9df-gnp4p             2/2     Running     2          42s
+   istio-security-post-install-1.2.0-hq42r   0/1     Completed   0          44s
+   istio-sidecar-injector-6f4c67c6cd-z7jkj   1/1     Running     0          41s
+   istio-telemetry-5bf99ff6df-8k8tm          2/2     Running     2          42s
+   prometheus-776fdf7479-c786k               0/1     Running     0          41s
    ```
 
    Before you continue, make sure all the pods are deployed and are either in the **`Running`** or **`Completed`** state. If they're in `pending` state, wait a few minutes to let the deployment finish.
